@@ -1,0 +1,23 @@
+---
+
+- name: Server Setup
+  hosts: all
+  gather_facts: no
+
+files:
+    - vars.yml
+
+  user: "{{ user }}"
+
+  roles:
+    - { role: prerequisites, tags: [ 'prerequisites' ] }
+    - { role: access, tags: [ 'access' ] }
+    - { role: common, tags: [ 'common' ] }
+    - { role: virtualenv, tags: [ 'virtualenv' ] }
+    - { role: postgres, tags: [ 'postgres' ] }
+    - { role: common-python, tags: [ 'common-python' ] }
+    - { role: nginx, tags: [ 'nginx' ] }
+    - { role: uwsgi, tags: [ 'uwsgi' ] }
+    - { role: redis, tags: [ 'redis' ] }
+    - { role: django, tags: [ 'django' ] }
+    - { role: celery, tags: [ 'celery' ] }

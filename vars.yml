@@ -1,0 +1,57 @@
+---
+
+# Server user name
+user: root
+
+# Python version (2 or 3)
+# Also change the `ansible_python_interpreter` in server.yml
+python_main_version: 3
+python_sub_version: 5
+
+# SSH Configuration
+upload_authorized_keys: "no"
+
+# The db password will be set by the script. Make something up!
+postgres_host: localhost
+postgres_user: django
+postgres_db_name: django
+postgres_pw: YOUR_ROLE_PASSWORD
+postgres_port: 5432
+
+update_apt_cache: "yes"
+# Use this settings, if you want to create a local database
+postgres_local: "no"
+postgres_postgis: "yes"
+
+# Your git repo, django project and venv should be called the same:
+project_name: allbooks
+
+# If you're using a custom django folder, use something like `django/`
+django_folder:
+
+# From where can we clone the django project?
+# Don't forget to add your access token to ``.github_token``
+git_repo: git@github.com:ajitjasrotia/allbooks.git
+
+# github_user: YOUR_GITHUB_USERNAME
+# github_repo_owner: USER_OR_ORG_NAME
+# github_repo_name: REPO_NAME
+
+# Your website URLs:
+ip: your.server.IP
+domain: your-domain.com
+
+# Certificate settings
+email: info@bitmazk.com
+
+# =============================================================================
+# The things here should not be changed when using a default server layout
+# =============================================================================
+venv_name: "{{ project_name }}"
+server_git_repo: "/home/{{ user }}/src/{{ project_name }}"
+server_git_project_root: "{{ server_git_repo }}/"
+server_requirements_txt: "{{ server_git_project_root }}{{ django_folder }}requirements.txt"
+server_project_folder: "/home/{{ user }}/project"
+server_project_local_settings: "{{ server_project_folder }}/{{ django_folder }}{{ project_name }}/settings/local_settings.py"
+wsgi_folder: "{{ server_project_folder }}/{{ django_folder }}{{ project_name }}/{{ project_name }}/wsgi.py"
+server_assets_folder: "/home/{{ user }}/project_assets"

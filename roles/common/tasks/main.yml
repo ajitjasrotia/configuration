@@ -1,0 +1,10 @@
+---
+
+- name: Install Packages
+  apt:
+    name:
+      - git
+      - htop
+      - emacs25
+    state: present
+    autoclean: yes

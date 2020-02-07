@@ -1,0 +1,27 @@
+---
+
+- name: virtualenv - create folders
+  raw: mkdir -p ~/tmp
+
+- name: virtualenv - install pip3
+  become: yes
+  apt: name=python3-pip
+
+- name: Install virtualenv
+  become: yes
+  pip: name=virtualenv
+
+- name: Install virtualenvwrapper
+  become: yes
+  pip: name=virtualenvwrapper
+
+- name: virtualenv - add virtualenvwrapper exports to .bash_profile
+  lineinfile: 'dest=~/.bash_profile line="{{ item }}" create=yes'
+  with_items:
+    - export WORKON_HOME=~/.virtualenvs
+    - mkdir -p $WORKON_HOME
+    - export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+    - source /usr/local/bin/virtualenvwrapper.sh
+
+- name: Source the new .bashrc
+  raw: source .bashrc
